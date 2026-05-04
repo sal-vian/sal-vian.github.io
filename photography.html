@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Photography – Saleh Faghfoorian</title>
+  <meta name="description" content="Photography gallery by Saleh Faghfoorian." />
+  <meta name="theme-color" content="#0ea5e9" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #0b1020;
+      --card: #0b1222;
+      --muted: #94a3b8;
+      --text: #e2e8f0;
+      --brand: #22d3ee;
+      --brand-2: #7c3aed;
+      --shadow: rgba(2, 8, 23, .6);
+      --radius: 18px;
+      --maxw: 1100px;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root{
+        --bg: #f8fafc;
+        --card: #ffffff;
+        --muted: #475569;
+        --text: #0f172a;
+        --brand: #0ea5e9;
+        --brand-2: #7c3aed;
+        --shadow: rgba(2, 8, 23, .08);
+      }
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background: radial-gradient(1200px 600px at 10% -10%, rgba(124,58,237,.18), transparent 60%),
+                  radial-gradient(1000px 500px at 110% 10%, rgba(34,211,238,.18), transparent 60%),
+                  var(--bg);
+      color: var(--text);
+      font: 16px/1.6 "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    }
+
+    .container{max-width:var(--maxw); margin-inline:auto; padding:0 20px}
+
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(15,23,42,.8), rgba(15,23,42,.6));
+      border-bottom: 1px solid rgba(148,163,184,.15);
+    }
+
+    .nav-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:14px 0;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      color:var(--text);
+    }
+
+    .brand .logo{
+      width:32px;
+      height:32px;
+      border-radius:10px;
+      background:
+        radial-gradient(40px 40px at 80% 20%, var(--brand), transparent 60%),
+        radial-gradient(50px 50px at 20% 80%, var(--brand-2), transparent 60%),
+        linear-gradient(135deg, #111827, #0b1323);
+      box-shadow:0 8px 24px var(--shadow), inset 0 0 0 1px rgba(255,255,255,.08);
+    }
+
+    .brand strong{font-weight:700; letter-spacing:.2px}
+
+    .nav ul{
+      display:flex;
+      gap:18px;
+      list-style:none;
+      margin:0;
+      padding:0;
+    }
+
+    .nav a{
+      color:var(--text);
+      text-decoration:none;
+      opacity:.85;
+    }
+
+    .nav a:hover{opacity:1}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      text-decoration:none;
+      color:var(--text);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(148,163,184,.25);
+      box-shadow: 0 6px 18px var(--shadow);
+    }
+
+    .btn:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px var(--shadow);
+    }
+
+    .btn.primary{
+      background: linear-gradient(90deg, var(--brand), var(--brand-2));
+      border-color: transparent;
+    }
+
+    .hero{
+      padding:70px 0 38px;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      font-weight:600;
+      letter-spacing:.2em;
+      color: var(--brand);
+      text-transform:uppercase;
+      font-size:12px;
+      margin-bottom:8px;
+    }
+
+    .section-title{
+      font-size: clamp(32px, 5vw, 56px);
+      line-height:1.05;
+      margin:0 0 14px;
+    }
+
+    .section-sub{
+      color:var(--muted);
+      margin:0;
+      max-width:760px;
+      font-size:18px;
+    }
+
+    .gallery{
+      columns: 3 260px;
+      column-gap: 14px;
+      padding: 36px 0 80px;
+    }
+
+    .gallery img{
+      width:100%;
+      margin: 0 0 14px;
+      display:block;
+      border-radius:14px;
+      cursor:pointer;
+      break-inside: avoid;
+      box-shadow: 0 8px 22px var(--shadow);
+      transition: transform .18s ease, opacity .18s ease;
+    }
+
+    .gallery img:hover{
+      transform: translateY(-2px);
+      opacity:.92;
+    }
+
+    .lightbox{
+      position: fixed;
+      inset:0;
+      display:none;
+      place-items:center;
+      background: rgba(2, 6, 23, .86);
+      backdrop-filter: blur(4px);
+      z-index:100;
+      padding:20px;
+    }
+
+    .lightbox.open{
+      display:grid;
+    }
+
+    .lightbox img{
+      max-width:min(94vw, 1300px);
+      max-height:86vh;
+      border-radius:16px;
+      box-shadow:0 20px 50px rgba(0,0,0,.45);
+    }
+
+    .lightbox-caption{
+      color:#cbd5e1;
+      margin-top:12px;
+      text-align:center;
+      font-size:14px;
+    }
+
+    footer{
+      padding:30px 0 60px;
+      color:var(--muted);
+      text-align:center;
+    }
+
+    @media (max-width: 700px){
+      .nav-inner{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .nav ul{
+        flex-wrap:wrap;
+        gap:12px;
+      }
+
+      .hero{
+        padding-top:46px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html" aria-label="Homepage">
+        <span class="logo" aria-hidden="true"></span>
+        <strong>Saleh Faghfoorian</strong>
+      </a>
+      <ul>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#publications">Publications</a></li>
+        <li><a href="index.html#hobbies">Hobbies</a></li>
+        <li><a href="photography.html">Photography</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow">Photography</span>
+        <h1 class="section-title">Photo Gallery</h1>
+        <p class="section-sub">
+          A collection of photos I’ve taken while traveling, walking around cities, and exploring nature.
+          Captured using a Nikon D5100 with 18–55mm, 55–200mm, and 35mm portrait lenses.
+        </p>
+
+        <div style="margin-top:22px">
+          <a class="btn" href="index.html#gallery">Back to homepage</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="gallery" aria-live="polite">
+        <img src="images/thumbs/IMG_2834.webp" data-full="images/full/IMG_2834.webp" alt="Photography by Saleh Faghfoorian" loading="lazy" decoding="async" tabindex="0" />
+        <img src="images/thumbs/IMG_6541.webp" data-full="images/full/IMG_6541.webp" alt="Photography by Saleh Faghfoorian" loading="lazy" decoding="async" tabindex="0" />
+        <img src="images/thumbs/IMG_7419.webp" data-full="images/full/IMG_7419.webp" alt="Photography by Saleh Faghfoorian" loading="lazy" decoding="async" tabindex="0" />
+        <img src="images/thumbs/IMG_8211.webp" data-full="images/full/IMG_8211.webp" alt="Photography by Saleh Faghfoorian" loading="lazy" decoding="async" tabindex="0" />
+        <img src="images/thumbs/DSC_0196.webp" data-full="images/full/DSC_0196.webp" alt="Photography by Saleh Faghfoorian" loading="lazy" decoding="async" tabindex="0" />
+        <img src="images/thumbs/IMG_0381.webp" data-full="images/full/IMG_0381.webp" alt="Photography by Saleh Faghfoorian" loading="lazy" decoding="async" tabindex="0" />
+        <img src="images/thumbs/DSC_0380.webp" data-full="images/full/DSC_0380.webp" alt="Photography by Saleh Faghfoorian" loading="lazy" decoding="async" tabindex="0" />
+        <img src="images/thumbs/IMG_1864.webp" data-full="images/full/IMG_1864.webp" alt="Photography by Saleh Faghfoorian" loading="lazy" decoding="async" tabindex="0" />
+        <img src="images/thumbs/IMG_2846.webp" data-full="images/full/IMG_2846.webp" alt="Photography by Saleh Faghfoorian" loading="lazy" decoding="async" tabindex="0" />
+        <img src="images/thumbs/IMG_7224.webp" data-full="images/full/IMG_7224.webp" alt="Photography by Saleh Faghfoorian" loading="lazy" decoding="async" tabindex="0" />
+        <img src="images/thumbs/IMG_7598.webp" data-full="images/full/IMG_7598.webp" alt="Photography by Saleh Faghfoorian" loading="lazy" decoding="async" tabindex="0" />
+        <img src="images/thumbs/IMG_6127.webp" data-full="images/full/IMG_6127.webp" alt="Photography by Saleh Faghfoorian" loading="lazy" decoding="async" tabindex="0" />
+        <img src="images/thumbs/IMG_3481.webp" data-full="images/full/IMG_3481.webp" alt="Photography by Saleh Faghfoorian" loading="lazy" decoding="async" tabindex="0" />
+        <img src="images/thumbs/IMG_3289.webp" data-full="images/full/IMG_3289.webp" alt="Photography by Saleh Faghfoorian" loading="lazy" decoding="async" tabindex="0" />
+        <img src="images/thumbs/IMG_3152.webp" data-full="images/full/IMG_3152.webp" alt="Photography by Saleh Faghfoorian" loading="lazy" decoding="async" tabindex="0" />
+        <img src="images/thumbs/DSC_0126.webp" data-full="images/full/DSC_0126.webp" alt="Photography by Saleh Faghfoorian" loading="lazy" decoding="async" tabindex="0" />
+        <img src="images/thumbs/IMG_1382.webp" data-full="images/full/IMG_1382.webp" alt="Photography by Saleh Faghfoorian" loading="lazy" decoding="async" tabindex="0" />
+        <img src="images/thumbs/DSC_0198.webp" data-full="images/full/DSC_0198.webp" alt="Photography by Saleh Faghfoorian" loading="lazy" decoding="async" tabindex="0" />
+        <img src="images/thumbs/DSC_0279.webp" data-full="images/full/DSC_0279.webp" alt="Photography by Saleh Faghfoorian" loading="lazy" decoding="async" tabindex="0" />
+      </div>
+    </section>
+  </main>
+
+  <div class="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" id="lightbox">
+    <div>
+      <img src="" alt="" id="lightbox-img" />
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <footer class="container">
+    <div style="display:flex; gap:10px; justify-content:center; margin-bottom:10px; flex-wrap:wrap">
+      <a class="btn" href="index.html">Home</a>
+      <a class="btn" href="#top">Back to top</a>
+    </div>
+    <small>© <span id="year"></span> Saleh. All rights reserved.</small>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const lbCaption = document.getElementById('lightbox-caption');
+
+    document.querySelectorAll('.gallery img').forEach(img => {
+      const open = () => {
+        lbImg.src = img.dataset.full || img.src;
+        lbImg.alt = img.alt;
+        lbCaption.textContent = img.alt;
+        lb.classList.add('open');
+      };
+
+      img.addEventListener('click', open);
+
+      img.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          open();
+        }
+      });
+    });
+
+    lb.addEventListener('click', () => {
+      lb.classList.remove('open');
+      lbImg.src = "";
+    });
+
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        lb.classList.remove('open');
+        lbImg.src = "";
+      }
+    });
+  </script>
+</body>
+</html>
