@@ -153,7 +153,7 @@
   <!-- ===== NAV ===== -->
   <nav class="nav">
     <div class="container nav-inner">
-      <a class="brand" href="#home" aria-label="Homepage">
+      <a class="brand" href="index.html" aria-label="Homepage">
         <span class="logo" aria-hidden="true"></span>
         <strong>Saleh Faghfoorian</strong>
       </a>
@@ -163,7 +163,7 @@
         <!-- <li><a href="#career">Career</a></li> -->
         <li><a href="#publications">Publications</a></li>
         <li><a href="#hobbies">Hobbies</a></li>
-        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="photography.html">Photography</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
@@ -337,7 +337,7 @@
         </div>
         <div class="card">
           <h3 style="margin-top:0">Driving</h3>
-          <p>Road trips, campings, and exploring new places.</p>
+          <p>Road trips, camping, and exploring new places.</p>
         </div>
       </div>
     </div>
@@ -348,16 +348,25 @@
     <div class="container">
       <span class="eyebrow">Gallery</span>
       <h2 class="section-title">Photo Highlights</h2>
-      <p class="section-sub">All photos were captured using a Nikon D5100 with 18–55mm, 55–200mm, and 35mm portrait lenses.</code></p>
+      <p class="section-sub">All photos were captured using a Nikon D5100 with 18–55mm, 55–200mm, and 35mm portrait lenses.</p>
       <div class="gallery" aria-live="polite">
         <!-- Replace these with your images -->
-        <img src="images/IMG_2834.JPG" alt="Caption 1" tabindex="0" />
+        <!-- <img src="images/IMG_2834.JPG" alt="Caption 1" tabindex="0" />
         <img src="images/IMG_6541.jpeg" alt="Caption 2" tabindex="0" />
         <img src="images/IMG_7419.jpeg" alt="Caption 3" tabindex="0" />
         <img src="images/IMG_8211.jpeg" alt="Caption 4" tabindex="0" />
         <img src="images/DSC_0196.jpeg" alt="Caption 5" tabindex="0" />
-        <img src="images/IMG_0381.jpeg" alt="Caption 6" tabindex="0" />
-        <img src="images/DSC_0380.jpeg" alt="Caption 7" tabindex="0" />
+        <img src="images/IMG_0381.jpeg" alt="Caption 6" tabindex="0" /> -->
+
+        <img src="images/thumbs/IMG_2834.webp" data-full="images/full/IMG_2834.webp" alt="Photo 1" loading="lazy" decoding="async" tabindex="0" />
+        <img src="images/thumbs/IMG_6541.webp" data-full="images/full/IMG_6541.webp" alt="Photo 2" loading="lazy" decoding="async" tabindex="0" />
+        <img src="images/thumbs/IMG_7419.webp" data-full="images/full/IMG_7419.webp" alt="Photo 3" loading="lazy" decoding="async" tabindex="0" />
+        <img src="images/thumbs/IMG_8211.webp" data-full="images/full/IMG_8211.webp" alt="Photo 4" loading="lazy" decoding="async" tabindex="0" />
+        <img src="images/thumbs/DSC_0196.webp" data-full="images/full/DSC_0196.webp" alt="Photo 5" loading="lazy" decoding="async" tabindex="0" />
+        <img src="images/thumbs/IMG_0381.webp" data-full="images/full/IMG_0381.webp" alt="Photo 6" loading="lazy" decoding="async" tabindex="0" />
+
+        
+        <!-- <img src="images/DSC_0380.jpeg" alt="Caption 7" tabindex="0" />
         <img src="images/IMG_1864.jpeg" alt="Caption 8" tabindex="0" />
         <img src="images/IMG_2846.JPG" alt="Caption 9" tabindex="0" />
         <img src="images/IMG_7224.jpeg" alt="Caption 10" tabindex="0" />
@@ -365,16 +374,18 @@
         <img src="images/IMG_6127.jpeg" alt="Caption 12" tabindex="0" />
         <img src="images/IMG_3481.jpeg" alt="Caption 13" tabindex="0" />
         <img src="images/IMG_3289.jpeg" alt="Caption 14" tabindex="0" />
-        <img src="images/IMG_3152.jpeg" alt="Caption 15" tabindex="0" />
-        <!-- <img src="images/IMG_9576.JPG" alt="Caption 12" tabindex="0" /> -->
-        <img src="images/DSC_0126.jpeg" alt="Caption 16" tabindex="0" />
+        <img src="images/IMG_3152.jpeg" alt="Caption 15" tabindex="0" /> -->
+        <!-- <img src="images/DSC_0126.jpeg" alt="Caption 16" tabindex="0" />
         <img src="images/IMG_1382.jpeg" alt="Caption 17" tabindex="0" />
         
         <img src="images/DSC_0198.jpeg" alt="Caption 18" tabindex="0" />
-        <img src="images/DSC_0279.jpeg" alt="Caption 19" tabindex="0" />
+        <img src="images/DSC_0279.jpeg" alt="Caption 19" tabindex="0" /> -->
       </div>
       <div class="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" id="lightbox">
         <img src="" alt="" id="lightbox-img" />
+      </div>
+      <div style="margin-top:20px">
+        <a class="btn primary" href="photography.html">View full photography gallery</a>
       </div>
     </div>
   </section>
@@ -459,7 +470,12 @@
     const lb = document.getElementById('lightbox');
     const lbImg = document.getElementById('lightbox-img');
     document.querySelectorAll('.gallery img').forEach(img => {
-      const open = () => { lbImg.src = img.src; lbImg.alt = img.alt; lb.classList.add('open'); lb.focus(); };
+      const open = () => {
+        lbImg.src = img.dataset.full || img.src;
+        lbImg.alt = img.alt;
+        lb.classList.add('open');
+        lb.focus();
+      };
       img.addEventListener('click', open);
       img.addEventListener('keypress', (e)=>{ if(e.key==='Enter' || e.key===' '){ open(); }});
     });
